@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
 
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Input, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
 export default function Home() {
   const minKcalRef = useRef();
   const maxKcalRef = useRef();
-  const [data1, setData1] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState();
 
   function submitFormHandler(event: any) {
     event.preventDefault();
@@ -50,15 +50,14 @@ export default function Home() {
       }
     )
       .then((response) => response.json())
-      .then((data) => {
-        setData1(data);
-        return console.log(data);
-      });
+      .then((data) => setVideos(data));
   }
 
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=ajax`;
+  const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=blackpink`;
 
-  console.log(url);
+  // const videoSearch = (key, search, )
+
+  console.log(youtubeUrl);
   // Cut Calories
 
   return (
@@ -72,14 +71,25 @@ export default function Home() {
       <form onSubmit={submitFormHandler}>
         {/* <InputEvent /> */}
         {/* <label htmlFor="year">Year</label> */}
+        <Input />
         <input type="number" min="1" max="3000" id="min" ref={minKcalRef} />
         <input type="number" min="1" max="3000" id="max" ref={maxKcalRef} />
         <button type="submit">Submit</button>
       </form>
-      {console.log(data1[0])}
-      <Link href={url}>aaaa</Link>
+      {/* {console.log(data1[0])} */}
+      <Link href={youtubeUrl}>aaaa</Link>
       {/* <Box>{data1[0].title}</Box> */}
       {/* <footer className={styles.footer}></footer> */}
+      <iframe
+        id="ytplayer"
+        type="text/html"
+        width="720"
+        height="405"
+        // src="https://www.youtube.com/embed/M7lc1UVf-VE"
+        src="https://www.youtube.com/embed/gQlMMD8auMs"
+        frameBorder="0"
+        allowFullScreen={true}
+      />
     </Box>
   );
 }
