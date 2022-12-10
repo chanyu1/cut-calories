@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
-import { VideoTitle } from "../components/VideoTitle";
-import { VideoContents } from "../components/VideoContents";
-import { VideoForm } from "../components/VideoForm";
+import { RecipeTitle } from "../components/features/recipeTitle";
+import { VideoContents } from "../components/features/videoContents";
+import { VideoForm } from "../components/features/videoForm";
 
 export default function Home() {
   const [minKcal, setMinKcal] = useState(200);
   const [maxKcal, setMaxKcal] = useState(500);
-  const [searchedRecipes, setSearchedRecipes] = useState([]);
-  const [videos, setVideos] = useState([]);
+  const [recipeTitle, setRecipeTitle] = useState("");
   const [selectedVideo, setSelectedVideo] = useState({});
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     onSearchVideo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onChangeKcal = (kcal: any) => {
+  const onChangeKcal = (kcal: Array<number>) => {
     kcal[0] !== minKcal && setMinKcal(kcal[0]);
     kcal[1] !== maxKcal && setMaxKcal(kcal[1]);
   };
@@ -32,31 +32,30 @@ export default function Home() {
       },
     })
       .then((response) => response.json())
+      .then((recipe) => {
+        setRecipeTitle(recipe[0].title);
+        return fetch(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipe[0].title}&maxResults=2`
+        );
+      })
+      .then((response) => response.json())
+      .then((videos) => {
+        setSelectedVideo(videos.items[0]);
+        setVideos(videos.items);
+      })
       // .then((recipes) => {
       //   setSearchedRecipes(recipes);
-      //   return fetch(
-      //     `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipes[0]["title"]}&maxResults=1`
-      //   );
+      //   const vid = {
+      //     items: [
+      //       {
+      //         title: "asdgbbb",
+      //       },
+      //     ],
+      //   };
+      //   // console.log(vid.items[0]);
+      //   setVideos([]);
+      //   setSelectedVideo(vid);
       // })
-      // .then((response) => response.json())
-      // .then((videos) => {
-      //   console.log(45, videos);
-      //   setVideos(videos);
-      //   setSelectedVideo(videos.items[0]);
-      // })
-      .then((recipes) => {
-        setSearchedRecipes(recipes);
-        const vid = {
-          items: [
-            {
-              title: "asdgbbb",
-            },
-          ],
-        };
-        // console.log(vid.items[0]);
-        setVideos([]);
-        setSelectedVideo(vid);
-      })
       .catch();
   };
 
@@ -65,11 +64,13 @@ export default function Home() {
       <Head>
         <title>カットカロリー</title>
       </Head>
-      <VideoTitle title={"asdg"} />
+      <RecipeTitle title={recipeTitle} />
       <VideoContents
-        videos={videos}
         selectedVideo={selectedVideo}
-        onVideoSelect={(selectedVideo: any) => setSelectedVideo(selectedVideo)}
+        videos={videos}
+        onSelectedVideo={(selectedVideo: object) =>
+          setSelectedVideo(selectedVideo)
+        }
       />
       <VideoForm
         minKcal={minKcal}
