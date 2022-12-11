@@ -22,7 +22,7 @@ export const VideoListItem = ({
       <Flex>
         <Img src={imageUrl} h="100%" />
         <Flex ml="12px" alignItems="center">
-          {video.snippet.title}
+          <p dangerouslySetInnerHTML={{ __html: video.snippet.title }} />
         </Flex>
       </Flex>
     </ListItem>
