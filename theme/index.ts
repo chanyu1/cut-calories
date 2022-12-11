@@ -6,6 +6,9 @@ export const theme = extendTheme({
       body: {
         color: "#F3EFE0",
         bg: "#222222",
+        "&::-webkit-scrollbar": {
+          display: "none",
+        },
       },
     }),
   },
