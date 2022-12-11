@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 
 import { RecipeTitle } from "../components/features/recipeTitle";
@@ -11,8 +11,11 @@ export default function Home() {
   const [recipeTitle, setRecipeTitle] = useState("");
   const [selectedVideo, setSelectedVideo] = useState({});
   const [videos, setVideos] = useState([]);
+  const dataFetchedRef = useRef(false);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     onSearchVideo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -43,20 +46,9 @@ export default function Home() {
         setSelectedVideo(videos.items[0]);
         setVideos(videos.items);
       })
-      // .then((recipes) => {
-      //   setSearchedRecipes(recipes);
-      //   const vid = {
-      //     items: [
-      //       {
-      //         title: "asdgbbb",
-      //       },
-      //     ],
-      //   };
-      //   // console.log(vid.items[0]);
-      //   setVideos([]);
-      //   setSelectedVideo(vid);
-      // })
-      .catch();
+      .catch((error) => {
+        alert(`${error.name}: ${error.message}`);
+      });
   };
 
   return (
