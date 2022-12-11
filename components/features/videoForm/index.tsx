@@ -25,7 +25,8 @@ export const VideoForm = ({
     h="150px"
     zIndex="docked"
     justifyContent="center"
-    borderTop="2px solid teal"
+    borderTop="2px solid"
+    borderColor="teal"
   >
     <Flex
       w="100%"
@@ -50,7 +51,9 @@ export const VideoForm = ({
         <BaseButton
           label="検&nbsp;&nbsp;&nbsp;索"
           onClick={onSearchVideo}
-          colorScheme="teal"
+          bg="teal"
+          colorScheme="#22A39F"
+          color="beige"
           width="100px"
         />
       </Flex>
