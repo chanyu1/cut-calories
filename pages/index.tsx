@@ -38,7 +38,7 @@ export default function Home() {
       .then((recipe) => {
         setRecipeTitle(recipe[0].title);
         return fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipe[0].title}&maxResults=2`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipe[0].title}&maxResults=5`
         );
       })
       .then((response) => response.json())

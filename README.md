@@ -6,10 +6,11 @@
 
 ### 開発概要
 
-- 「Cut calroies」は、...アプリケーションです。
+<!-- - 「Cut calroies」は、...アプリケーションです。 -->
 
 ### 開発スタック
 
 - Next.js, React, TypeScript
 - Chakra UI
 - Heroku
+- PWA
