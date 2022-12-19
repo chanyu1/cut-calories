@@ -4,14 +4,14 @@ import { VideoListItem } from "./VideoListItem";
 
 type VideoListProps = {
   videos: Array<object>;
-  onSelectedVideo: (selectedVideo: object) => void;
+  onSelectVideo: (selectedVideo: object) => void;
 };
 
-export const VideoList = ({ videos, onSelectedVideo }: VideoListProps) => (
+export const VideoList = ({ videos, onSelectVideo }: VideoListProps) => (
   <List w="100%">
     {videos.map((video: any) => (
       <Box p="6px 20px" key={video.etag}>
-        <VideoListItem video={video} onSelectedVideo={onSelectedVideo} />
+        <VideoListItem video={video} onSelectVideo={onSelectVideo} />
       </Box>
     ))}
   </List>

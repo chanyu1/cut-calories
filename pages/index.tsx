@@ -29,7 +29,6 @@ export default function Home() {
     const recipesUrl = `https://api.spoonacular.com/recipes/findByNutrients?minCalories=${minKcal}&maxCalories=${maxKcal}&number=1&random=true&apiKey=${process.env.NEXT_PUBLIC_RECIPES_API_KEY}`;
 
     await fetch(recipesUrl, {
-      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
@@ -60,7 +59,7 @@ export default function Home() {
       <VideoContents
         selectedVideo={selectedVideo}
         videos={videos}
-        onSelectedVideo={(selectedVideo: object) =>
+        onSelectVideo={(selectedVideo: object) =>
           setSelectedVideo(selectedVideo)
         }
       />

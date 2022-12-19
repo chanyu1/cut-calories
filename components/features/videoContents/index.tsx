@@ -7,13 +7,13 @@ import { VideoList } from "./VideoList";
 type VideoContentsProps = {
   selectedVideo: object;
   videos: Array<object>;
-  onSelectedVideo: (selectedVideo: object) => void;
+  onSelectVideo: (selectedVideo: object) => void;
 };
 
 export const VideoContents = ({
   videos,
   selectedVideo,
-  onSelectedVideo,
+  onSelectVideo,
 }: VideoContentsProps) => {
   if (_.isEmpty(videos)) {
     return (
@@ -36,7 +36,7 @@ export const VideoContents = ({
         >
           <VideoDetail video={selectedVideo} />
         </Flex>
-        <VideoList videos={videos} onSelectedVideo={onSelectedVideo} />
+        <VideoList videos={videos} onSelectVideo={onSelectVideo} />
       </Flex>
     </Flex>
   );

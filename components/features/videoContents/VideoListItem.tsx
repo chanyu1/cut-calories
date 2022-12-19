@@ -2,13 +2,10 @@ import { Img, Flex, ListItem } from "@chakra-ui/react";
 
 type VideoListItemProps = {
   video: any;
-  onSelectedVideo: (selectedVideo: object) => void;
+  onSelectVideo: (selectedVideo: object) => void;
 };
 
-export const VideoListItem = ({
-  video,
-  onSelectedVideo,
-}: VideoListItemProps) => {
+export const VideoListItem = ({ video, onSelectVideo }: VideoListItemProps) => {
   const imageUrl = video.snippet.thumbnails.default.url;
 
   return (
@@ -17,7 +14,7 @@ export const VideoListItem = ({
       bg="grey"
       borderRadius="12px"
       cursor="pointer"
-      onClick={() => onSelectedVideo(video)}
+      onClick={() => onSelectVideo(video)}
     >
       <Flex>
         <Img src={imageUrl} h="100%" />

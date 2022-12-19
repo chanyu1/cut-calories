@@ -1,12 +1,12 @@
-# Cut calroies
+# Cut calories
 
-### アプリケーション
+<!-- ### アプリケーション -->
 
-<!-- - [Cut calroies](https://cut-calroies.herokuapp.com/) -->
+<!-- - [Cut calories](https://cut-calories.herokuapp.com/) -->
 
-### 開発概要
+<!-- ### 開発概要 -->
 
-<!-- - 「Cut calroies」は、...アプリケーションです。 -->
+<!-- - 「Cut calories」は、...アプリケーションです。 -->
 
 ### 開発スタック
 

@@ -22,9 +22,10 @@ export const SliderInput = ({
     colorScheme="pink"
     defaultValue={[minKcal, maxKcal]}
     step={10}
-    min={50}
-    max={1800}
+    min={100}
+    max={1200}
     onChange={onChangeKcal}
+    minStepsBetweenThumbs={10}
   >
     <RangeSliderTrack>
       <RangeSliderFilledTrack />
