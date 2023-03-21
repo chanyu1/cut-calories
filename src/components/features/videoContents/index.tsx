@@ -11,8 +11,8 @@ type VideoContentsProps = {
 };
 
 export const VideoContents = ({
-  videos,
   selectedVideo,
+  videos,
   onSelectVideo,
 }: VideoContentsProps) => {
   if (_.isEmpty(videos)) {
