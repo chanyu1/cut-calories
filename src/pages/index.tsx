@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import Head from "next/head";
 
-import { RecipeTitle } from "../components/features/recipeTitle";
-import { VideoContents } from "../components/features/videoContents";
-import { VideoForm } from "../components/features/videoForm";
+import { RecipeTitle } from "components/features/recipeTitle";
+import { VideoContents } from "components/features/videoContents";
+import { VideoForm } from "components/features/videoForm";
 
 export default function Home() {
   const [minKcal, setMinKcal] = useState(200);

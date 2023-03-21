@@ -1,8 +1,8 @@
 import { Flex, HStack, Spacer } from "@chakra-ui/react";
 
-import { BaseButton } from "../../parts/BaseButton";
-import { KcalLabel } from "../../parts/KcalLabel";
-import { SliderInput } from "../../parts/SliderInput";
+import { BaseButton } from "components/parts/BaseButton";
+import { KcalLabel } from "components/parts/KcalLabel";
+import { SliderInput } from "components/parts/SliderInput";
 
 type VideoFormProps = {
   minKcal: number;
