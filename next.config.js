@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-import runtimeCaching from "next-pwa/cache";
+const runtimeCaching = require("next-pwa/cache");
 
 const withPWA = require("next-pwa")({
   dest: "public",
@@ -15,4 +15,4 @@ const nextConfig = withPWA({
   swcMinify: true,
 });
 
-export default nextConfig;
+module.exports = nextConfig;
