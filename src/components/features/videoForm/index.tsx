@@ -8,7 +8,7 @@ type VideoFormProps = {
   minKcal: number;
   maxKcal: number;
   onChangeKcal: (kcal: Array<number>) => void;
-  onSearchVideo: () => void;
+  onSearchVideo: (minKcal: number, maxKcal: number) => void;
 };
 
 export const VideoForm = ({
@@ -24,7 +24,7 @@ export const VideoForm = ({
     w="100%"
     h="150px"
     zIndex="docked"
-    justifyContent="center"
+    justify="center"
     borderTop="2px solid"
     borderColor="teal"
   >
@@ -34,7 +34,7 @@ export const VideoForm = ({
       h="100%"
       p="20px"
       flexDirection="column"
-      justifyContent="center"
+      justify="center"
     >
       <HStack>
         <KcalLabel kcal={minKcal} kcalText="Kcal&nbsp;&nbsp;~" />
@@ -47,10 +47,10 @@ export const VideoForm = ({
         onChangeKcal={onChangeKcal}
       />
       <Spacer />
-      <Flex justifyContent="right">
+      <Flex justify="right">
         <BaseButton
           label="検&nbsp;&nbsp;&nbsp;索"
-          onClick={onSearchVideo}
+          onClick={() => onSearchVideo(minKcal, maxKcal)}
           bg="teal"
           colorScheme="#22A39F"
           color="beige"

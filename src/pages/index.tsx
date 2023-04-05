@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    onSearchVideo();
+    onSearchVideo(minKcal, maxKcal);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -25,14 +25,10 @@ export default function Home() {
     kcal[1] !== maxKcal && setMaxKcal(kcal[1]);
   };
 
-  const onSearchVideo = async () => {
-    const recipesUrl = `https://api.spoonacular.com/recipes/findByNutrients?minCalories=${minKcal}&maxCalories=${maxKcal}&number=1&random=true&apiKey=${process.env.NEXT_PUBLIC_RECIPES_API_KEY}`;
-
-    await fetch(recipesUrl, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+  const onSearchVideo = async (minKcal: number, maxKcal: number) => {
+    await fetch(
+      `https://api.spoonacular.com/recipes/findByNutrients?minCalories=${minKcal}&maxCalories=${maxKcal}&number=1&random=true&apiKey=${process.env.NEXT_PUBLIC_RECIPES_API_KEY}`
+    )
       .then((response) => response.json())
       .then((recipe) => {
         setRecipeTitle(recipe[0].title);

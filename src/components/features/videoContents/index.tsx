@@ -17,17 +17,17 @@ export const VideoContents = ({
 }: VideoContentsProps) => {
   if (_.isEmpty(videos)) {
     return (
-      <Flex h="60vh" justifyContent="center" alignItems="center">
+      <Flex h="60vh" justify="center" alignItems="center">
         <Heading size="lg">Loading...</Heading>
       </Flex>
     );
   }
 
   return (
-    <Flex mb="170px" justifyContent="center">
+    <Flex mb="170px" justify="center">
       <Flex w="100%" maxW="800px" flexDirection="column" gap="16px">
         <Flex
-          justifyContent="center"
+          justify="center"
           bg="black"
           sx={{
             position: "sticky",
