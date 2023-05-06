@@ -1,51 +1,28 @@
-import { useEffect, useState, useRef } from "react";
-import Head from "next/head";
+import { useState } from 'react';
+import Head from 'next/head';
 
-import { RecipeTitle } from "components/features/recipeTitle";
-import { VideoContents } from "components/features/videoContents";
-import { VideoForm } from "components/features/videoForm";
+import { RecipeTitle } from 'components/features/recipeTitle';
+import { VideoContents } from 'components/features/videoContents';
+import { VideoForm } from 'components/features/videoForm';
+import { useRecipeVideos } from 'hooks/useRecipeVideos';
 
 export default function Home() {
-  const [minKcal, setMinKcal] = useState(200);
-  const [maxKcal, setMaxKcal] = useState(500);
-  const [recipeTitle, setRecipeTitle] = useState("");
-  const [selectedVideo, setSelectedVideo] = useState({});
-  const [videos, setVideos] = useState([]);
-  const dataFetchedRef = useRef(false);
+  const [minKcal, setMinKcal] = useState<number>(200);
+  const [maxKcal, setMaxKcal] = useState<number>(500);
+  const [selectedVideo, setSelectedVideo] = useState<object>({});
 
-  useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    onSearchVideo(minKcal, maxKcal);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // TODO: setSelectedVideo(videos[0])
+  const { recipeTitle, videos, fetchData } = useRecipeVideos(minKcal, maxKcal);
+  // console.log(recipeTitle);
 
-  const onChangeKcal = (kcal: Array<number>) => {
-    kcal[0] !== minKcal && setMinKcal(kcal[0]);
-    kcal[1] !== maxKcal && setMaxKcal(kcal[1]);
+  const onClickSearch = (sliderMinKcal: number, sliderMaxKcal: number) => {
+    fetchData(sliderMinKcal, sliderMaxKcal);
+    sliderMinKcal !== minKcal && setMinKcal(sliderMinKcal);
+    sliderMaxKcal !== maxKcal && setMaxKcal(sliderMaxKcal);
   };
 
-  const onSearchVideo = async (minKcal: number, maxKcal: number) => {
-    await fetch(
-      `https://api.spoonacular.com/recipes/findByNutrients?minCalories=${minKcal}&maxCalories=${maxKcal}&number=1&random=true&apiKey=${process.env.NEXT_PUBLIC_RECIPES_API_KEY}`
-    )
-      .then((response) => response.json())
-      .then((recipe) => {
-        setRecipeTitle(recipe[0].title);
-        return fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipe[0].title}&maxResults=5`
-        );
-      })
-      .then((response) => response.json())
-      .then((videos) => {
-        setSelectedVideo(videos.items[0]);
-        setVideos(videos.items);
-      })
-      .catch((error) => {
-        alert(`${error.name}: ${error.message}`);
-      });
-  };
-
+  // TODO: rendering check
+  console.log('render home');
   return (
     <>
       <Head>
@@ -62,8 +39,7 @@ export default function Home() {
       <VideoForm
         minKcal={minKcal}
         maxKcal={maxKcal}
-        onChangeKcal={onChangeKcal}
-        onSearchVideo={onSearchVideo}
+        onClickSearch={onClickSearch}
       />
     </>
   );

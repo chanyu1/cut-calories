@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Flex, Box, Heading, Tooltip } from "@chakra-ui/react";
+import { useState } from 'react';
+import { Flex, Box, Heading, Tooltip } from '@chakra-ui/react';
 
 type RecipeTitleProps = {
   title: string;
@@ -9,7 +9,8 @@ export const RecipeTitle = ({ title }: RecipeTitleProps) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   return (
-    <Flex top="0" w="100%" p="12px 20px 16px" justify="center">
+    // TODO: check h size
+    <Flex top="0" w="100%" h="68px" p="12px 20px 16px" justify="center">
       <Tooltip label={title} isOpen={isTooltipOpen}>
         <Box w="800px" textAlign="center" overflow="hidden" whiteSpace="nowrap">
           <Heading

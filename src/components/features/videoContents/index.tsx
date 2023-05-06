@@ -1,8 +1,8 @@
-import _ from "lodash";
-import { Heading, Flex } from "@chakra-ui/react";
+import _ from 'lodash';
+import { Heading, Flex } from '@chakra-ui/react';
 
-import { VideoDetail } from "./VideoDetail";
-import { VideoList } from "./VideoList";
+import { VideoDetail } from './VideoDetail';
+import { VideoList } from './VideoList';
 
 type VideoContentsProps = {
   selectedVideo: object;
@@ -15,7 +15,7 @@ export const VideoContents = ({
   videos,
   onSelectVideo,
 }: VideoContentsProps) => {
-  if (_.isEmpty(videos)) {
+  if (_.isEmpty(selectedVideo) || _.isEmpty(videos)) {
     return (
       <Flex h="60vh" justify="center" alignItems="center">
         <Heading size="lg">Loading...</Heading>
@@ -30,8 +30,8 @@ export const VideoContents = ({
           justify="center"
           bg="black"
           sx={{
-            position: "sticky",
-            top: "0",
+            position: 'sticky',
+            top: '0',
           }}
         >
           <VideoDetail video={selectedVideo} />
