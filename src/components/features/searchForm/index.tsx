@@ -5,17 +5,17 @@ import { BaseButton } from 'components/parts/BaseButton';
 import { KcalLabel } from 'components/parts/KcalLabel';
 import { SliderInput } from 'components/parts/SliderInput';
 
-type VideoFormProps = {
+type SearchFormProps = {
   minKcal: number;
   maxKcal: number;
   onClickSearch: (sliderMinKcal: number, sliderMaxKcal: number) => void;
 };
 
-export const VideoForm = ({
+export const SearchForm = ({
   minKcal,
   maxKcal,
   onClickSearch,
-}: VideoFormProps) => {
+}: SearchFormProps) => {
   const [sliderMinKcal, setSliderMinKcal] = useState<number>(minKcal);
   const [sliderMaxKcal, setSliderMaxKcal] = useState<number>(maxKcal);
 
@@ -24,8 +24,6 @@ export const VideoForm = ({
     kcal[1] !== sliderMaxKcal && setSliderMaxKcal(kcal[1]);
   };
 
-  // TODO: rendering check
-  console.log('render form');
   return (
     <Flex
       bg="black"

@@ -14,30 +14,20 @@ export const VideoContents = ({
   selectedVideo,
   videos,
   onSelectVideo,
-}: VideoContentsProps) => {
-  if (_.isEmpty(selectedVideo) || _.isEmpty(videos)) {
-    return (
-      <Flex h="60vh" justify="center" alignItems="center">
-        <Heading size="lg">Loading...</Heading>
+}: VideoContentsProps) => (
+  <Flex mb="170px" justify="center">
+    <Flex w="100%" maxW="800px" flexDirection="column" gap="16px">
+      <Flex
+        justify="center"
+        bg="black"
+        sx={{
+          position: 'sticky',
+          top: '0',
+        }}
+      >
+        <VideoDetail video={selectedVideo} />
       </Flex>
-    );
-  }
-
-  return (
-    <Flex mb="170px" justify="center">
-      <Flex w="100%" maxW="800px" flexDirection="column" gap="16px">
-        <Flex
-          justify="center"
-          bg="black"
-          sx={{
-            position: 'sticky',
-            top: '0',
-          }}
-        >
-          <VideoDetail video={selectedVideo} />
-        </Flex>
-        <VideoList videos={videos} onSelectVideo={onSelectVideo} />
-      </Flex>
+      <VideoList videos={videos} onSelectVideo={onSelectVideo} />
     </Flex>
-  );
-};
+  </Flex>
+);

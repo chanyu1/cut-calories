@@ -1,4 +1,4 @@
-import { Img, Flex, ListItem } from "@chakra-ui/react";
+import { Img, Flex, ListItem } from '@chakra-ui/react';
 
 type VideoListItemProps = {
   video: any;

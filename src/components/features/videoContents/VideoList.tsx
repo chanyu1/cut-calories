@@ -1,6 +1,6 @@
-import { Box, List } from "@chakra-ui/react";
+import { Box, List } from '@chakra-ui/react';
 
-import { VideoListItem } from "./VideoListItem";
+import { VideoListItem } from './VideoListItem';
 
 type VideoListProps = {
   videos: Array<object>;

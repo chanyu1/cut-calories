@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-import { RecipeTitle } from 'components/features/recipeTitle';
-import { VideoContents } from 'components/features/videoContents';
-import { VideoForm } from 'components/features/videoForm';
+import { ContentArea } from 'components/features/contentArea';
+import { SearchForm } from 'components/features/searchForm';
 import { useRecipeVideos } from 'hooks/useRecipeVideos';
 
 export default function Home() {
   const [minKcal, setMinKcal] = useState<number>(200);
   const [maxKcal, setMaxKcal] = useState<number>(500);
-  const [selectedVideo, setSelectedVideo] = useState<object>({});
+  // TODO: Type
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
-  // TODO: setSelectedVideo(videos[0])
-  const { recipeTitle, videos, fetchData } = useRecipeVideos(minKcal, maxKcal);
-  // console.log(recipeTitle);
+  const { data, isLoading, error, fetchData } = useRecipeVideos(
+    minKcal,
+    maxKcal
+  );
+
+  useEffect(() => {
+    data?.videoContents && setSelectedVideo(data?.videoContents[0]);
+  }, [data?.videoContents]);
 
   const onClickSearch = (sliderMinKcal: number, sliderMaxKcal: number) => {
     fetchData(sliderMinKcal, sliderMaxKcal);
@@ -21,22 +26,25 @@ export default function Home() {
     sliderMaxKcal !== maxKcal && setMaxKcal(sliderMaxKcal);
   };
 
-  // TODO: rendering check
-  console.log('render home');
+  const onSelectVideo = (selectedVideo: any) => {
+    return setSelectedVideo(selectedVideo);
+  };
+
+  if (error) return alert(`${error.name}: ${error.message}`);
+
+  // TODO: Indicate whether to send a cookie in a cross-site request by specifying its SameSite attribute
   return (
     <>
       <Head>
         <title>カットカロリー</title>
       </Head>
-      <RecipeTitle title={recipeTitle} />
-      <VideoContents
+      <ContentArea
+        data={data}
+        isLoading={isLoading}
         selectedVideo={selectedVideo}
-        videos={videos}
-        onSelectVideo={(selectedVideo: object) =>
-          setSelectedVideo(selectedVideo)
-        }
+        onSelectVideo={onSelectVideo}
       />
-      <VideoForm
+      <SearchForm
         minKcal={minKcal}
         maxKcal={maxKcal}
         onClickSearch={onClickSearch}

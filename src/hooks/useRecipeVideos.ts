@@ -1,32 +1,44 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
+import axios from 'axios';
 
 export const useRecipeVideos = (minKcal: number, maxKcal: number) => {
-  const [recipeTitle, setRecipeTitle] = useState<string>('');
-  const [videos, setVideos] = useState<Array<object>>([]);
+  // TODO: Type
+  const [data, setData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<any>(null);
+  const dataFetchedRef = useRef(false);
 
   const fetchData = useCallback((minKcal: number, maxKcal: number) => {
-    fetch(
-      `https://api.spoonacular.com/recipes/findByNutrients?minCalories=${minKcal}&maxCalories=${maxKcal}&number=1&random=true&apiKey=${process.env.NEXT_PUBLIC_RECIPES_API_KEY}`
-    )
-      .then((res) => res.json())
-      .then((recipe) => {
-        // TODO: console.log check, how many called api
-        console.log('call', recipe);
-        // Your daily points limit of 150 has been reached. Please upgrade your plan to continue using the API
-        setRecipeTitle(recipe[0].title);
-        // FIXME: change maxResults 5
-        return fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipe[0].title}&maxResults=1`
-        );
-      })
-      .then((res) => res.json())
-      .then((videos) => setVideos(videos.items))
-      .catch((e) => alert(`${e.name}: ${e.message}`));
+    setIsLoading(true);
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/findByNutrients?minCalories=${minKcal}&maxCalories=${maxKcal}&number=1&random=true&apiKey=${process.env.NEXT_PUBLIC_RECIPES_API_KEY}`
+      )
+      // FIXME: change maxResults 5
+      .then((recipe) =>
+        axios.get(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&type=video&q=${recipe.data[0].title}&maxResults=1`,
+          {
+            params: { recipeTitle: recipe.data[0].title },
+          }
+        )
+      )
+      .then((videos) =>
+        setData({
+          recipeTitle: videos.config.params.recipeTitle,
+          videoContents: videos.data.items,
+        })
+      )
+      .catch((err) => setError(err))
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
     fetchData(minKcal, maxKcal);
-  }, [fetchData, minKcal, maxKcal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchData]);
 
-  return { recipeTitle, videos, fetchData };
+  return { data, isLoading, error, fetchData };
 };

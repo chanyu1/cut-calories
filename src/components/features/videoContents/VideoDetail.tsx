@@ -1,4 +1,4 @@
-import { AspectRatio } from "@chakra-ui/react";
+import { AspectRatio } from '@chakra-ui/react';
 
 type VideoDetailProps = {
   video: any;

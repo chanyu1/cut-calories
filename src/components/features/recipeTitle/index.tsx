@@ -9,7 +9,6 @@ export const RecipeTitle = ({ title }: RecipeTitleProps) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   return (
-    // TODO: check h size
     <Flex top="0" w="100%" h="68px" p="12px 20px 16px" justify="center">
       <Tooltip label={title} isOpen={isTooltipOpen}>
         <Box w="800px" textAlign="center" overflow="hidden" whiteSpace="nowrap">
