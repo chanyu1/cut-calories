@@ -1,13 +1,14 @@
 import _ from 'lodash';
-import { Heading, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { VideoDetail } from './VideoDetail';
 import { VideoList } from './VideoList';
+import { VideoContent } from 'types/data';
 
 type VideoContentsProps = {
-  selectedVideo: object;
-  videos: Array<object>;
-  onSelectVideo: (selectedVideo: object) => void;
+  selectedVideo: VideoContent;
+  videos: VideoContent[];
+  onSelectVideo: (selectedVideo: VideoContent) => void;
 };
 
 export const VideoContents = ({

@@ -2,13 +2,13 @@ import { Flex, Heading } from '@chakra-ui/react';
 
 import { RecipeTitle } from 'components/features/recipeTitle';
 import { VideoContents } from 'components/features/videoContents';
+import { VideoContent, Data } from 'types/data';
 
-// TODO: Type
 type ContentAreaProps = {
-  data: any;
+  data: Data;
   isLoading: boolean;
-  selectedVideo: any;
-  onSelectVideo: any;
+  selectedVideo: VideoContent;
+  onSelectVideo: (selectedVideo: VideoContent) => void;
 };
 
 export const ContentArea = ({

@@ -1,8 +1,10 @@
 import { Img, Flex, ListItem } from '@chakra-ui/react';
 
+import { VideoContent } from 'types/data';
+
 type VideoListItemProps = {
-  video: any;
-  onSelectVideo: (selectedVideo: object) => void;
+  video: VideoContent;
+  onSelectVideo: (selectedVideo: VideoContent) => void;
 };
 
 export const VideoListItem = ({ video, onSelectVideo }: VideoListItemProps) => {

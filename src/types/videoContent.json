@@ -1,0 +1,34 @@
+{
+  "kind": "youtube#searchResult",
+  "etag": "RLqqYeb2VXnnh65Cg1u_DxsOa1o",
+  "id": {
+    "kind": "youtube#video",
+    "videoId": "cd-qx2lF9Hg"
+  },
+  "snippet": {
+    "publishedAt": "2016-05-09T12:00:03Z",
+    "channelId": "UC1_-qKnEhVJ-k77YRyR2Ciw",
+    "title": "藤原さくら - 「Soup」 (short ver.)",
+    "description": "フジテレビ系月9ドラマ「ラヴソング」主題歌『Soup』 藤原さくらファーストシングル『Soup』 6月8日(水) CDリリース 主要各 ...",
+    "thumbnails": {
+      "default": {
+        "url": "https://i.ytimg.com/vi/cd-qx2lF9Hg/default.jpg",
+        "width": 120,
+        "height": 90
+      },
+      "medium": {
+        "url": "https://i.ytimg.com/vi/cd-qx2lF9Hg/mqdefault.jpg",
+        "width": 320,
+        "height": 180
+      },
+      "high": {
+        "url": "https://i.ytimg.com/vi/cd-qx2lF9Hg/hqdefault.jpg",
+        "width": 480,
+        "height": 360
+      }
+    },
+    "channelTitle": "藤原さくら",
+    "liveBroadcastContent": "none",
+    "publishTime": "2016-05-09T12:00:03Z"
+  }
+}

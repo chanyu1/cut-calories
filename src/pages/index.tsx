@@ -4,12 +4,14 @@ import Head from 'next/head';
 import { ContentArea } from 'components/features/contentArea';
 import { SearchForm } from 'components/features/searchForm';
 import { useRecipeVideos } from 'hooks/useRecipeVideos';
+import { VideoContent } from 'types/data';
 
 export default function Home() {
   const [minKcal, setMinKcal] = useState<number>(200);
   const [maxKcal, setMaxKcal] = useState<number>(500);
-  // TODO: Type
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<VideoContent>(
+    {} as VideoContent
+  );
 
   const { data, isLoading, error, fetchData } = useRecipeVideos(
     minKcal,
@@ -26,13 +28,12 @@ export default function Home() {
     sliderMaxKcal !== maxKcal && setMaxKcal(sliderMaxKcal);
   };
 
-  const onSelectVideo = (selectedVideo: any) => {
-    return setSelectedVideo(selectedVideo);
+  const onSelectVideo = (selectedVideo: VideoContent) => {
+    setSelectedVideo(selectedVideo);
   };
 
   if (error) return alert(`${error.name}: ${error.message}`);
 
-  // TODO: Indicate whether to send a cookie in a cross-site request by specifying its SameSite attribute
   return (
     <>
       <Head>
